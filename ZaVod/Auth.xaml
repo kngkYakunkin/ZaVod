@@ -1,0 +1,46 @@
+﻿<Window x:Class="ZaVod.Auth"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ZaVod.ViewModels"
+        mc:Ignorable="d"
+        Title="ZaVod" Height="470" Width="370" ResizeMode="NoResize"
+        Background="#f0f0f0">
+    <Window.DataContext>
+        <local:AuthViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Window.Resources>
+
+    <Grid>
+        <Grid RenderTransformOrigin="0.5,0.5">
+            <Grid.RenderTransform>
+                <ScaleTransform ScaleX="1.02" ScaleY="1.02"/>
+            </Grid.RenderTransform>
+            <Rectangle Fill="#3A8EBA" RadiusX="10" RadiusY="10"/>
+        </Grid>
+        <StackPanel>
+            <TextBlock Foreground="white" FontSize="30px" FontWeight="Bold" HorizontalAlignment="center">
+                <Run Text="Z" Foreground="silver" /><Run Text="a"/><Run Text="V" Foreground="silver"/><Run Text="od"/>
+
+            </TextBlock>
+        </StackPanel>
+        <StackPanel Width="300" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                    Background="#FFFFFF" Height="340">
+            <TextBlock Text="Добро пожаловать!" FontSize="22" FontStyle="Italic" FontWeight="DemiBold" Foreground="#3A8EBA" HorizontalAlignment="Center" Margin="0,10,0,20"/>
+
+            <TextBlock Text="Login" FontSize="16" Margin="0,10,0,5" HorizontalAlignment="Center"/>
+            <TextBox Width="270" Height="39" FontSize="18px" Margin="0,0,0,10" Padding="5" BorderThickness="1" BorderBrush="#3A8EBA" Text="{Binding authModel.Login, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Text="Password" FontSize="16" Margin="0,10,0,5" HorizontalAlignment="Center"/>
+            <PasswordBox Height="39" Width="270" Padding="5" FontSize="18px" BorderThickness="1" BorderBrush="#3A8EBA"
+                          Margin="0,0,0,20" PasswordChanged="PasswordBox_PasswordChanged" />
+            <Button Content="Войти" Width="152" FontSize="17px" Height="38" Background="#3A8EBA" Foreground="White" FontWeight="Bold" 
+                    Cursor="Hand" Command="{Binding AuthCommand}"/>
+            <TextBlock Text="Неверный логин или пароль!" Visibility="{Binding ErrorVisible, Converter={StaticResource BooleanToVisibilityConverter}}"></TextBlock>
+        </StackPanel>
+    </Grid>
+</Window>
